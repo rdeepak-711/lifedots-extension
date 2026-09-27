@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LifeDots — the year</title>
+<link rel="stylesheet" href="./year.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p class="brand">LifeDots</p>
+      <h1 id="year">—</h1>
+      <p class="habit" id="habit"></p>
+    </header>
+
+    <section class="stats">
+      <div><b id="filled">—</b><span>days done</span></div>
+      <div><b id="hours">—</b><span>hours on it</span></div>
+      <div><b id="remaining">—</b><span>days left this year</span></div>
+    </section>
+
+    <section class="gridwrap">
+      <div class="scroller">
+      <div class="months" id="months"></div>
+      <div class="board">
+        <div class="weekdays"><span>M</span><span></span><span>W</span><span></span><span>F</span><span></span><span>S</span></div>
+        <div class="grid" id="grid"></div>
+      </div>
+      </div>
+      <p class="legend">
+        <span class="k"><i></i> nothing</span>
+        <span class="k"><i class="part"></i> some</span>
+        <span class="k"><i class="on"></i> done</span>
+        <span class="k"><i class="today"></i> today</span>
+      </p>
+    </section>
+
+    <p class="note" id="note"></p>
+    <footer><button id="back" type="button">← close</button></footer>
+  </main>
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "everdot",
+  "private": true,
+  "license": "GPL-3.0-only",
+  "version": "0.6.1",
+  "type": "module",
+  "description": "Counts real minutes on the sites you choose, like LeetCode or NeetCode. One dot a day. No streaks. Nothing leaves your computer.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build && node tools/check-package.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "node tools/check-package.mjs",
+    "icons": "python3 tools/make-icons.py"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.0.0-beta.33",
+    "@types/chrome": "^0.3.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}

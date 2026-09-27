@@ -1,0 +1,439 @@
+/* No remote fonts: MV3's content security policy blocks them, so this is a
+   system stack on purpose. Warm paper and ink come from the design docs. */
+:root {
+  --bg: #faf8f4;
+  --surface: #ffffff;
+  --ink: #16150f;
+  --ink2: #5c5851;
+  --ink3: #918c83;
+  --rule: #e6e1d7;
+  --accent: #e07b2c;
+  --good: #2e8b5c;
+  --bad: #d0453f;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  width: 272px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.panel { padding: 15px 17px 16px; }
+
+.brand {
+  margin: 0 0 9px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  display: flex;
+  justify-content: space-between;
+}
+.ver { letter-spacing: 0.06em; }
+
+.habit {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.dotrow {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* The dot mirrors the toolbar icon: a ring that fills from the bottom. */
+.dot {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2.5px solid var(--accent);
+  flex: none;
+  overflow: hidden;
+}
+.dot i {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  background: var(--accent);
+  transition: height 0.3s ease;
+}
+
+.mins { font-family: var(--mono); font-size: 13px; color: var(--ink); }
+.mins b { font-weight: 700; }
+.mins span { color: var(--ink3); }
+
+.now {
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink2);
+}
+.now b { color: var(--ink); }
+
+.verify {
+  margin: 13px 0 0;
+  padding: 11px 12px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+}
+.vh {
+  margin: 0 0 6px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+.vh code { font-size: 9.5px; }
+.verdict { margin: 0; font-size: 12.5px; line-height: 1.4; font-weight: 600; }
+.verdict.yes { color: var(--good); }
+.verdict.no { color: var(--bad); }
+.verdict.wait { color: var(--ink3); font-weight: 400; }
+.counts {
+  margin: 7px 0 0;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink3);
+  line-height: 1.5;
+}
+
+.log { margin: 12px 0 0; }
+.log summary {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  cursor: pointer;
+}
+.log ul {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  max-height: 132px;
+  overflow-y: auto;
+}
+.log li {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink2);
+  padding: 2px 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  gap: 7px;
+}
+.log li:last-child { border-bottom: none; }
+.log .t { color: var(--ink3); flex: none; }
+.log .credit { margin-left: auto; color: var(--good); flex: none; }
+
+.sites {
+  margin: 12px 0 0;
+  padding-top: 9px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink3);
+  line-height: 1.6;
+  word-break: break-all;
+}
+
+/* ---------- setup ---------- */
+.q {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink2);
+}
+.q:first-of-type { margin-top: 6px; }
+
+.text {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--rule);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.text:focus { outline: none; border-color: var(--accent); }
+.text.small { width: 74px; }
+
+.addrow { display: flex; gap: 6px; }
+.add {
+  flex: none;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--rule2, #d3cdc0);
+  border-radius: 8px;
+  padding: 0 13px;
+  cursor: pointer;
+}
+.add:hover { border-color: var(--ink); }
+
+.hint {
+  margin: 6px 0 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--ink3);
+}
+.hint code { font-family: var(--mono); font-size: 10.5px; }
+.hint.bad { color: var(--bad); }
+
+.sitelist { margin: 9px 0 0; padding: 0; list-style: none; }
+.sitelist li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 11.5px;
+}
+.sitelist li:last-child { border-bottom: none; }
+.sitelist .name { flex: 1; word-break: break-all; }
+.sitelist .ok { color: var(--good); flex: none; }
+.sitelist .warn { color: var(--bad); flex: none; cursor: pointer; text-decoration: underline; }
+.sitelist .rm {
+  flex: none;
+  border: none;
+  background: none;
+  color: var(--ink3);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 2px;
+}
+.sitelist .rm:hover { color: var(--bad); }
+
+.go {
+  width: 100%;
+  margin-top: 16px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--ink);
+  border: none;
+  border-radius: 9px;
+  padding: 10px;
+  cursor: pointer;
+}
+.go:disabled { background: var(--rule2, #d3cdc0); cursor: not-allowed; }
+
+.link {
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 11.5px;
+  color: var(--ink3);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.link:hover { color: var(--ink); }
+#cancel-edit { display: block; margin: 9px auto 0; }
+
+/* ---------- two weeks ---------- */
+.lab {
+  margin: 14px 0 5px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+.wk { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 5px; }
+.wk span {
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--ink3);
+  text-align: center;
+}
+.wkgrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+.wkgrid i {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #e8e4da;
+  display: block;
+}
+.wkgrid i.on { background: var(--ink); }
+.wkgrid i.future { background: #f3f0e9; }
+.wkgrid i.today { box-shadow: 0 0 0 1.5px var(--accent); }
+.wkgrid i.today.on { background: var(--good); box-shadow: 0 0 0 1.5px var(--good); }
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 13px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+
+/* One-click add — deliberately quiet.
+   It appears inside a panel the user opened, never on a page, and it is a line
+   rather than a call to action. Anything louder would be a prompt appearing
+   every time someone checks their progress from an unrelated tab, which is the
+   pattern that owns FocusGuard's entire one-star column. */
+.offer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 9px 0 0;
+}
+.offeradd {
+  flex: 1;
+  text-align: left;
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 11.5px;
+  color: var(--ink3);
+  cursor: pointer;
+}
+.offeradd:hover { color: var(--ink); }
+.offeradd b { font-family: var(--mono); font-size: 11px; color: var(--ink2); word-break: break-all; }
+.offeradd:hover b { color: var(--ink); }
+.offerno {
+  flex: none;
+  border: none;
+  background: none;
+  padding: 0 2px;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--rule2, #d3cdc0);
+  cursor: pointer;
+}
+.offerno:hover { color: var(--ink2); }
+
+/* A heartbeat next to the number. Green and breathing while time is being
+   counted, grey and still when it is not — so "is this thing even running?"
+   is answerable at a glance rather than by reading a log. */
+.pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rule2, #d3cdc0);
+  flex: none;
+  margin-left: auto;
+}
+.pulse.on {
+  background: var(--good);
+  animation: breathe 1.6s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.8); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse.on { animation: none; }
+}
+
+/* ---------- session ----------
+   Optional by design. The button is an offer, never a gate: minutes are counted
+   whether or not one is running, so nobody can lose a day by forgetting to
+   press start. That is the whole difference between this and the Pomodoro apps
+   whose most-quoted complaint is "it turned into an extra task I needed to do
+   in order to do other tasks." */
+.sessionbox { margin-top: 13px; }
+
+.startsession {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--rule2, #d3cdc0);
+  border-radius: 9px;
+  padding: 9px;
+  cursor: pointer;
+}
+.startsession:hover { border-color: var(--ink); }
+
+.running {
+  background: var(--ink);
+  border-radius: 11px;
+  padding: 12px 13px;
+  color: #edeae1;
+}
+.running .top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+.countdown {
+  font-family: var(--mono);
+  font-size: 21px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.running .stop {
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 11.5px;
+  color: #8e8981;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.running .stop:hover { color: #fff; }
+.split { display: flex; gap: 12px; font-family: var(--mono); font-size: 11px; color: #b5b0a6; }
+.split b { color: #fff; }
+.split .drifted b { color: #e8a9a5; }
+
+.summary {
+  background: var(--surface);
+  border: 1.5px solid var(--rule2, #d3cdc0);
+  border-radius: 11px;
+  padding: 12px 13px;
+}
+.summary .head {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin: 0 0 6px;
+}
+.summary .line { margin: 0 0 8px; font-size: 13.5px; line-height: 1.45; }
+.summary .line b { font-weight: 600; }
+.summary .again {
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 11.5px;
+  color: var(--ink3);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.summary .again:hover { color: var(--ink); }

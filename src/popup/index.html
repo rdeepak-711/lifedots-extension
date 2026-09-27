@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LifeDots</title>
+<link rel="stylesheet" href="./popup.css">
+</head>
+<body>
+
+<!-- ============ SETUP ============ -->
+<main class="panel" id="setup" hidden>
+  <p class="brand">LifeDots <span class="ver" id="setupmode">setup</span></p>
+
+  <label class="q" for="habit-input">What are you doing every day?</label>
+  <input class="text" id="habit-input" type="text" maxlength="60"
+         placeholder="one system design topic" autocomplete="off">
+
+  <label class="q" for="site-input">Where does it happen?</label>
+  <div class="addrow">
+    <input class="text" id="site-input" type="text" placeholder="leetcode.com" autocomplete="off">
+    <button class="add" id="add-site" type="button">Add</button>
+  </div>
+  <p class="hint" id="site-hint">A bare address covers its subdomains. Add a path to narrow it —
+    <code>github.com/yourname</code>.</p>
+  <ul class="sitelist" id="sitelist"></ul>
+
+  <label class="q" for="target-input">Minutes a day that count as done</label>
+  <input class="text small" id="target-input" type="number" min="1" max="600" value="25">
+
+  <button class="go" id="start" type="button" disabled>Start tracking</button>
+  <button class="link" id="cancel-edit" type="button" hidden>Cancel</button>
+</main>
+
+<!-- ============ RUNNING ============ -->
+<main class="panel" id="running" hidden>
+  <p class="brand">LifeDots <span class="ver">v1</span></p>
+  <p class="habit" id="habit">…</p>
+
+  <div class="dotrow">
+    <span class="dot" id="dot" aria-hidden="true"><i id="fill"></i></span>
+    <span class="mins" id="mins">—</span>
+    <span class="pulse" id="pulse" aria-hidden="true"></span>
+  </div>
+
+  <p class="now" id="now">…</p>
+
+  <p class="offer" id="offer" hidden>
+    <button class="offeradd" id="addthis" type="button"></button>
+    <button class="offerno" id="dismiss" type="button" title="Never suggest this site">×</button>
+  </p>
+
+  <div class="sessionbox" id="sessionbox"></div>
+
+  <p class="lab">this week, and last</p>
+  <div class="wk" id="weekdays"></div>
+  <div class="wkgrid" id="wkgrid"></div>
+
+  <details class="log">
+    <summary>Recent activity</summary>
+    <ul id="loglist"></ul>
+    <p class="counts" id="counts"></p>
+  </details>
+
+  <div class="foot">
+    <button class="link" id="seeyear" type="button">See the whole year</button>
+    <button class="link" id="edit" type="button">Edit habit</button>
+    <button class="link" id="export" type="button">Export</button>
+  </div>
+</main>
+
+<script type="module" src="./main.ts"></script>
+</body>
+</html>

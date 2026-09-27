@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "LifeDots – Habit Time Tracker",
+  "version": "0.6.1",
+  "description": "Counts real minutes on the sites you choose, like LeetCode or NeetCode. One dot a day. No streaks. Nothing leaves your computer.",
+  "action": {
+    "default_title": "LifeDots",
+    "default_popup": "src/popup/index.html",
+    "default_icon": {
+      "16": "icons/dot-0-16.png",
+      "32": "icons/dot-0-32.png",
+      "48": "icons/dot-0-48.png",
+      "128": "icons/dot-0-128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background.ts",
+    "type": "module"
+  },
+  "icons": {
+    "16": "icons/dot-100-16.png",
+    "32": "icons/dot-100-32.png",
+    "48": "icons/dot-100-48.png",
+    "128": "icons/dot-100-128.png"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "idle",
+    "activeTab",
+    "notifications"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "lifedots@rdeepak.dev",
+      "strict_min_version": "121.0"
+    }
+  },
+  "optional_host_permissions": [
+    "*://*/*"
+  ]
+}
